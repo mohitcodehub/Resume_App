@@ -1,6 +1,7 @@
 import FormButton from "./FormButton";
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
+import VoiceInput from "./VoiceInput";
 
 const SocialMedia = () => {
   const { resumeData, setResumeData } = useContext(ResumeContext);
@@ -12,6 +13,12 @@ const SocialMedia = () => {
       "https://",
       ""
     );
+    setResumeData({ ...resumeData, socialMedia: newSocialMedia });
+  };
+
+  const handleVoiceInput = (index, fieldName, transcript) => {
+    const newSocialMedia = [...resumeData.socialMedia];
+    newSocialMedia[index][fieldName] = transcript.replace("https://", "");
     setResumeData({ ...resumeData, socialMedia: newSocialMedia });
   };
 
@@ -34,22 +41,26 @@ const SocialMedia = () => {
       <h2 className="input-title">Social Media</h2>
       {resumeData.socialMedia.map((socialMedia, index) => (
         <div key={index} className="flex-wrap-gap-2">
-          <input
-            type="text"
-            placeholder="Social Media"
-            name="socialMedia"
-            className="other-input"
-            value={socialMedia.socialMedia}
-            onChange={(e) => handleSocialMedia(e, index)}
-          />
-          <input
-            type="text"
-            placeholder="Link"
-            name="link"
-            className="other-input"
-            value={socialMedia.link}
-            onChange={(e) => handleSocialMedia(e, index)}
-          />
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'socialMedia', transcript)}>
+            <input
+              type="text"
+              placeholder="Social Media"
+              name="socialMedia"
+              className="other-input pr-12"
+              value={socialMedia.socialMedia}
+              onChange={(e) => handleSocialMedia(e, index)}
+            />
+          </VoiceInput>
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'link', transcript)}>
+            <input
+              type="text"
+              placeholder="Link"
+              name="link"
+              className="other-input pr-12"
+              value={socialMedia.link}
+              onChange={(e) => handleSocialMedia(e, index)}
+            />
+          </VoiceInput>
         </div>
       ))}
       <FormButton

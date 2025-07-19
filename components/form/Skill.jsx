@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
 import FormButton from "./FormButton";
+import VoiceInput from "./VoiceInput";
 
 const Skill = ({ title }) => {
   const { resumeData, setResumeData } = useContext(ResumeContext);
@@ -12,6 +13,20 @@ const Skill = ({ title }) => {
         .skills,
     ];
     newSkills[index] = e.target.value;
+    setResumeData((prevData) => ({
+      ...prevData,
+      skills: prevData.skills.map((skill) =>
+        skill.title === title ? { ...skill, skills: newSkills } : skill
+      ),
+    }));
+  };
+
+  const handleVoiceInput = (index, transcript) => {
+    const newSkills = [
+      ...resumeData.skills.find((skillType) => skillType.title === title)
+        .skills,
+    ];
+    newSkills[index] = transcript;
     setResumeData((prevData) => ({
       ...prevData,
       skills: prevData.skills.map((skill) =>
@@ -62,14 +77,16 @@ const Skill = ({ title }) => {
       <h2 className="input-title">{title}</h2>
       {skillType.skills.map((skill, index) => (
         <div key={index} className="f-col">
-          <input
-            type="text"
-            placeholder={title}
-            name={title}
-            className="w-full other-input"
-            value={skill}
-            onChange={(e) => handleSkill(e, index, title)}
-          />
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, transcript)}>
+            <input
+              type="text"
+              placeholder={title}
+              name={title}
+              className="w-full other-input pr-12"
+              value={skill}
+              onChange={(e) => handleSkill(e, index, title)}
+            />
+          </VoiceInput>
         </div>
       ))}
       <FormButton

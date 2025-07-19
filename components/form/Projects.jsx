@@ -1,6 +1,7 @@
 import FormButton from "./FormButton";
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
+import VoiceInput from "./VoiceInput";
 
 const Projects = () => {
   const { resumeData, setResumeData } = useContext(ResumeContext);
@@ -8,6 +9,12 @@ const Projects = () => {
   const handleProjects = (e, index) => {
     const newProjects = [...resumeData.projects];
     newProjects[index][e.target.name] = e.target.value;
+    setResumeData({ ...resumeData, projects: newProjects });
+  };
+
+  const handleVoiceInput = (index, fieldName, transcript) => {
+    const newProjects = [...resumeData.projects];
+    newProjects[index][fieldName] = transcript;
     setResumeData({ ...resumeData, projects: newProjects });
   };
 
@@ -40,39 +47,47 @@ const Projects = () => {
       <h2 className="input-title">Projects</h2>
       {resumeData.projects.map((project, index) => (
         <div key={index} className="f-col">
-          <input
-            type="text"
-            placeholder="Project Name"
-            name="name"
-            className="w-full other-input"
-            value={project.name}
-            onChange={(e) => handleProjects(e, index)}
-          />
-          <input
-            type="text"
-            placeholder="Link"
-            name="link"
-            className="w-full other-input"
-            value={project.link}
-            onChange={(e) => handleProjects(e, index)}
-          />
-          <textarea
-            type="text"
-            placeholder="Description"
-            name="description"
-            className="w-full other-input h-32"
-            value={project.description}
-            maxLength="250"
-            onChange={(e) => handleProjects(e, index)}
-          />
-          <textarea
-            type="text"
-            placeholder="Key Achievements"
-            name="keyAchievements"
-            className="w-full other-input h-40"
-            value={project.keyAchievements}
-            onChange={(e) => handleProjects(e, index)}
-          />
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'name', transcript)}>
+            <input
+              type="text"
+              placeholder="Project Name"
+              name="name"
+              className="w-full other-input pr-12"
+              value={project.name}
+              onChange={(e) => handleProjects(e, index)}
+            />
+          </VoiceInput>
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'link', transcript)}>
+            <input
+              type="text"
+              placeholder="Link"
+              name="link"
+              className="w-full other-input pr-12"
+              value={project.link}
+              onChange={(e) => handleProjects(e, index)}
+            />
+          </VoiceInput>
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'description', transcript)}>
+            <textarea
+              type="text"
+              placeholder="Description"
+              name="description"
+              className="w-full other-input h-32 pr-12"
+              value={project.description}
+              maxLength="250"
+              onChange={(e) => handleProjects(e, index)}
+            />
+          </VoiceInput>
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'keyAchievements', transcript)}>
+            <textarea
+              type="text"
+              placeholder="Key Achievements"
+              name="keyAchievements"
+              className="w-full other-input h-40 pr-12"
+              value={project.keyAchievements}
+              onChange={(e) => handleProjects(e, index)}
+            />
+          </VoiceInput>
           <div className="flex-wrap-gap-2">
             <input
               type="date"

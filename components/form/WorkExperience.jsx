@@ -1,6 +1,7 @@
 import FormButton from "./FormButton";
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
+import VoiceInput from "./VoiceInput";
 
 const WorkExperience = () => {
   const {
@@ -11,6 +12,12 @@ const WorkExperience = () => {
   const handleWorkExperience = (e, index) => {
     const newworkExperience = [...resumeData.workExperience];
     newworkExperience[index][e.target.name] = e.target.value;
+    setResumeData({ ...resumeData, workExperience: newworkExperience });
+  };
+
+  const handleVoiceInput = (index, fieldName, transcript) => {
+    const newworkExperience = [...resumeData.workExperience];
+    newworkExperience[index][fieldName] = transcript;
     setResumeData({ ...resumeData, workExperience: newworkExperience });
   };
 
@@ -43,39 +50,47 @@ const WorkExperience = () => {
       <h2 className="input-title">Work Experience</h2>
       {resumeData.workExperience.map((workExperience, index) => (
         <div key={index} className="f-col">
-          <input
-            type="text"
-            placeholder="Company"
-            name="company"
-            className="w-full other-input"
-            value={workExperience.company}
-            onChange={(e) => handleWorkExperience(e, index)}
-          />
-          <input
-            type="text"
-            placeholder="Job Title"
-            name="position"
-            className="w-full other-input"
-            value={workExperience.position}
-            onChange={(e) => handleWorkExperience(e, index)}
-          />
-          <textarea
-            type="text"
-            placeholder="Description"
-            name="description"
-            className="w-full other-input h-32"
-            value={workExperience.description}
-            maxLength="250"
-            onChange={(e) => handleWorkExperience(e, index)}
-          />
-          <textarea
-            type="text"
-            placeholder="Key Achievements"
-            name="keyAchievements"
-            className="w-full other-input h-40"
-            value={workExperience.keyAchievements}
-            onChange={(e) => handleWorkExperience(e, index)}
-          />
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'company', transcript)}>
+            <input
+              type="text"
+              placeholder="Company"
+              name="company"
+              className="w-full other-input pr-12"
+              value={workExperience.company}
+              onChange={(e) => handleWorkExperience(e, index)}
+            />
+          </VoiceInput>
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'position', transcript)}>
+            <input
+              type="text"
+              placeholder="Job Title"
+              name="position"
+              className="w-full other-input pr-12"
+              value={workExperience.position}
+              onChange={(e) => handleWorkExperience(e, index)}
+            />
+          </VoiceInput>
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'description', transcript)}>
+            <textarea
+              type="text"
+              placeholder="Description"
+              name="description"
+              className="w-full other-input h-32 pr-12"
+              value={workExperience.description}
+              maxLength="250"
+              onChange={(e) => handleWorkExperience(e, index)}
+            />
+          </VoiceInput>
+          <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'keyAchievements', transcript)}>
+            <textarea
+              type="text"
+              placeholder="Key Achievements"
+              name="keyAchievements"
+              className="w-full other-input h-40 pr-12"
+              value={workExperience.keyAchievements}
+              onChange={(e) => handleWorkExperience(e, index)}
+            />
+          </VoiceInput>
           <div className="flex-wrap-gap-2">
             <input
               type="date"

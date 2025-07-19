@@ -1,6 +1,7 @@
 import FormButton from "./FormButton";
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
+import VoiceInput from "./VoiceInput";
 
 const Education = () => {
     const { resumeData, setResumeData} = useContext(ResumeContext);
@@ -11,6 +12,12 @@ const Education = () => {
       setResumeData({ ...resumeData, education: newEducation });
     };
   
+    const handleVoiceInput = (index, fieldName, transcript) => {
+      const newEducation = [...resumeData.education];
+      newEducation[index][fieldName] = transcript;
+      setResumeData({ ...resumeData, education: newEducation });
+    };
+
     const addEducation = () => {
       setResumeData({
         ...resumeData,
@@ -33,20 +40,24 @@ const Education = () => {
         <h2 className="input-title">Education</h2>
         {resumeData.education.map((education, index) => (
           <div key={index} className="f-col">
-            <input
-              type="text"
-              placeholder="School"
-              name="school"
-              className="w-full other-input"
-              value={education.school}
-              onChange={(e) => handleEducation(e, index)} />
-            <input
-              type="text"
-              placeholder="Degree"
-              name="degree"
-              className="w-full other-input"
-              value={education.degree}
-              onChange={(e) => handleEducation(e, index)} />
+            <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'school', transcript)}>
+              <input
+                type="text"
+                placeholder="School"
+                name="school"
+                className="w-full other-input pr-12"
+                value={education.school}
+                onChange={(e) => handleEducation(e, index)} />
+            </VoiceInput>
+            <VoiceInput onTranscript={(transcript) => handleVoiceInput(index, 'degree', transcript)}>
+              <input
+                type="text"
+                placeholder="Degree"
+                name="degree"
+                className="w-full other-input pr-12"
+                value={education.degree}
+                onChange={(e) => handleEducation(e, index)} />
+            </VoiceInput>
             <div className="flex-wrap-gap-2">
               <input
                 type="date"
