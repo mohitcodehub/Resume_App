@@ -28,10 +28,10 @@ const LoadUnload = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 mb-2 justify-center">
+    <div className="flex flex-wrap gap-6 mb-6 justify-center">
       <div className="inline-flex flex-row items-center gap-2">
-        <h2 className="text-[1.2rem] text-white">Load Data</h2>
-        <label className="p-2 text-white bg-fuchsia-700 rounded cursor-pointer">
+        <h2 className="text-[1.2rem] text-white font-semibold drop-shadow-lg">Load Data</h2>
+        <label className="btn-gradient-secondary cursor-pointer">
           <FaCloudUploadAlt className="text-[1.2rem] text-white" />
           <input
             aria-label="Load Data"
@@ -43,10 +43,10 @@ const LoadUnload = () => {
         </label>
       </div>
       <div className="inline-flex flex-row items-center gap-2">
-        <h2 className="text-[1.2rem] text-white">Save Data</h2>
+        <h2 className="text-[1.2rem] text-white font-semibold drop-shadow-lg">Save Data</h2>
         <button
           aria-label="Save Data"
-          className="p-2 text-white bg-fuchsia-700 rounded"
+          className="btn-gradient-primary"
           onClick={(event) =>
             handleDownload(
               resumeData,

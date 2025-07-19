@@ -64,9 +64,10 @@ export default function Builder(props) {
           description="ATSResume is a cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes. Our platform uses the latest technology to analyze and optimize your resume for maximum visibility and success with applicant tracking systems. Say goodbye to frustration and wasted time spent on manual resume formatting. Create your winning resume with ATSResume today and get noticed by employers."
           keywords="ATS-friendly, Resume optimization, Keyword-rich resume, Applicant Tracking System, ATS resume builder, ATS resume templates, ATS-compliant resume, ATS-optimized CV, ATS-friendly format, ATS resume tips, Resume writing services, Career guidance, Job search in India, Resume tips for India, Professional resume builder, Cover letter writing, Interview preparation, Job interview tips, Career growth, Online job applications, resume builder, free resume builder, resume ats, best free resume builder, resume creator, resume cv, resume design, resume editor, resume maker"
         />
-        <div className="f-col gap-4 md:flex-row justify-evenly max-w-7xl md:mx-auto md:h-screen">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+          <div className="f-col gap-6 md:flex-row justify-evenly max-w-7xl md:mx-auto md:h-screen p-4">
           {!formClose && (
-            <form className="p-4 bg-fuchsia-600 exclude-print md:max-w-[40%] md:h-screen md:overflow-y-scroll">
+            <form className="p-6 form-gradient exclude-print md:max-w-[40%] md:h-screen md:overflow-y-scroll rounded-2xl shadow-2xl">
               <LoadUnload/>
               <PersonalInformation />
               <SocialMedia />
@@ -86,7 +87,10 @@ export default function Builder(props) {
               <Certification />
             </form>
           )}
-          <Preview />
+          <div className="preview-gradient rounded-2xl shadow-2xl md:max-w-[60%]">
+            <Preview />
+          </div>
+        </div>
         </div>
         <FormCP formClose={formClose} setFormClose={setFormClose} />
         <Print />

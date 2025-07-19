@@ -5,7 +5,7 @@
 @layer base {
     
     body {
-        @apply font-[sans-serif];
+        @apply font-[sans-serif] bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 min-h-screen;
     }
 
     ::-webkit-scrollbar {
@@ -17,11 +17,11 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-fuchsia-600;
+        @apply bg-gradient-to-r from-purple-500 to-pink-500 rounded-full;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply bg-fuchsia-700;
+        @apply bg-gradient-to-r from-purple-600 to-pink-600;
     }
 
     textarea, input:focus {
@@ -39,11 +39,15 @@
 
 @layer components{
     .pi{
-        @apply p-2 mb-2 text-black bg-white rounded text-[0.9rem];
+        @apply p-4 mb-3 text-gray-800 bg-white/90 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg transition-all duration-300 text-[0.9rem] placeholder-gray-500;
+    }
+
+    .pi:focus{
+        @apply bg-white shadow-xl ring-2 ring-purple-400/50 border-purple-300/50 transform scale-[1.02];
     }
 
     .profileInput{
-        @apply pi file:border-0 file:bg-fuchsia-500 file:text-white file:rounded-sm;
+        @apply pi file:border-0 file:bg-gradient-to-r file:from-purple-500 file:to-pink-500 file:text-white file:rounded-lg file:px-4 file:py-2 file:mr-3 file:shadow-md hover:file:shadow-lg file:transition-all file:duration-300;
     }
 
     .flex-col-gap-2{
@@ -55,11 +59,15 @@
     }
 
     .other-input{
-        @apply p-2 mb-2 text-black bg-white rounded focus:placeholder-transparent;
+        @apply p-4 mb-3 text-gray-800 bg-white/90 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg transition-all duration-300 focus:placeholder-transparent placeholder-gray-500;
+    }
+
+    .other-input:focus{
+        @apply bg-white shadow-xl ring-2 ring-purple-400/50 border-purple-300/50 transform scale-[1.02];
     }
 
     .input-title{
-        @apply text-[1rem] text-white font-semibold;
+        @apply text-[1.2rem] text-white font-bold mb-4 drop-shadow-lg tracking-wide;
     }
 
     .f-col{
@@ -67,13 +75,47 @@
     }
 
     .grid-4{
-        @apply grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4;
+        @apply grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6;
     }
 
     .editable{
         @apply hover:bg-gray-100 hover:cursor-text outline-none;
     }
 
+}
+
+/* Custom gradient backgrounds */
+.form-gradient {
+    background: linear-gradient(135deg, 
+        rgba(147, 51, 234, 0.95) 0%, 
+        rgba(168, 85, 247, 0.95) 25%, 
+        rgba(236, 72, 153, 0.95) 50%, 
+        rgba(219, 39, 119, 0.95) 75%, 
+        rgba(147, 51, 234, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-gradient {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(248, 250, 252, 0.95) 50%, 
+        rgba(241, 245, 249, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced button styles */
+.btn-gradient-primary {
+    @apply bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+}
+
+.btn-gradient-secondary {
+    @apply bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+}
+
+.btn-gradient-danger {
+    @apply bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
 }
 
 .name{

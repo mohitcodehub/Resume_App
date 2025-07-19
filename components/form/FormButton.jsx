@@ -6,14 +6,14 @@ const FormButton = ({ size, remove, add }) => {
       <div className="flex-wrap-gap-2 mb-2">
         <button type="button" onClick={add}
           aria-label="Add"
-          className="p-2 text-white bg-fuchsia-700 rounded text-xl">
+          className="btn-gradient-primary text-xl">
           <MdAddCircle />
         </button>
         {
           size > 0 &&
           <button type="button" onClick={remove}
             aria-label="Remove"
-            className="p-2 text-white bg-fuchsia-700 rounded text-xl">
+            className="btn-gradient-danger text-xl">
             <MdRemoveCircle />
           </button>
         }
